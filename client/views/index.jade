@@ -1,0 +1,47 @@
+.topbar
+  .topbar-inner
+    .container-fluid
+      a.brand(href="#") Acc Lab
+      ul.nav
+        li.active
+          a(href="#") Home
+
+.container-fluid
+  .sidebar
+    .well
+      h5 Devices
+      #device-list
+      button.btn.disabled#remove-graph Remove graph
+
+      h5 Selected device
+      #selected-device
+
+  .content
+    #root-tabs
+      ul
+        li
+          a(href="#raw-tab") Raw data
+        li
+          a(href="#filter-tab") Filter data
+        li
+          a(href="#gesture-tab") Gesture data
+
+      #raw-tab
+        .hero-unit
+          #graph
+            h2 Click on device to plot
+
+      #filter-tab
+        .hero-unit
+          h1 TODO
+
+      #gesture-tab
+        .hero-unit
+          h1 TODO
+  hr
+
+footer.footer
+  .container
+    .pull-right
+      .logo PecockTeam 2011
+
