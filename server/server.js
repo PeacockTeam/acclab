@@ -28,24 +28,36 @@ app.get('/', function(req, res){
     res.send('Welcome to hell!');
 });
 
+// XXX: add check for data or not?
 app.post('/1.0/acc/put', function(req, res, next) {
-    var sample = req.body;
+    var samples = req.body;
 
-    if (sample === undefined) {
+    if (samples === undefined) {
 	res.send({ error: "where data?" });
 	res.end();
 	return;
     }
 
-    db.collection("accdata", function(error, collection) {
+    if (samples instanceof Array == false) {
+	res.send({ error: "broken data!" });
+	res.end();
+	return;
+    }
+
+    var samplesArray = [];
+    samples.forEach(function(sample) {
 	var data = {
 	    timestamp: +sample.timestamp,
 	    device_id: sample.device_id,
 	    device_name: sample.device_name,
-	    data: sample.data,
+	    data: sample.data
 	};
+	samplesArray.push(data);
+    });
 
-	collection.insert(data, { safe: true }, function(error) {
+    // XXX: move all db interaction to specific place?
+    db.collection("accdata", function(error, collection) {
+	collection.insert(samplesArray, { safe: true }, function(error) {
 	    if (error) {
 		res.send('somthing wrong: ' + error.message, 500);
 	    } else {
@@ -53,8 +65,6 @@ app.post('/1.0/acc/put', function(req, res, next) {
 	    }
 	});
     });
-
-    console.log(req.body);
 });
 
 // Get all devices that pushes data
