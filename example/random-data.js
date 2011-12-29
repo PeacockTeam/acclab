@@ -57,6 +57,7 @@ function sendPost(post_data) {
 }
 
 process.on("SIGINT", function() {
-    console.log("stop");
     clearInterval(interval);
+    console.log("Stop and send generated data", samples.length);
+    sendPost(JSON.stringify(samples));
 });
