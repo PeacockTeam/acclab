@@ -6,6 +6,20 @@
         li.active
           a(href="#") Home
 
+//- XXX: use spec file with template
+script(id="device-template", type="text/x-jquery-tmpl")
+  h3
+    a(data-id="${device_id}", href="#")
+      ${device_name}
+  div
+    |Id:
+    span.dev-id
+      ${device_id}
+    br
+    |Total samples:
+    span.label.success
+      ${total}
+
 .container-fluid
   .sidebar
     .well

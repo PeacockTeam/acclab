@@ -80,7 +80,7 @@ app.get('/1.0/acc/get', function(req, res, next) {
                          {},                                        // finalize
                          {},                                        // command
                          function(error, devices) {
-                             res.send({ devices: devices });
+                             res.send(devices);
                          });
     });
 });

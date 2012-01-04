@@ -1,12 +1,36 @@
+acclab = {};
+acclab.options = {};
+
+// XXX: find normal deps module?
+function loadScript(url) {
+    $.ajax({
+	url : url,
+	dataType : "script",
+	async : false,
+	cache: false
+    });
+}
+
 $(function() {
-
-    $('#root-tabs').tabs();
-
-    // XXX: usually  used same host
     // TODO: move to config file
-    var options = {
+    acclab.options = _(acclab.options).extend({
 	host: "http://localhost:3000"
-    };
+    });
+
+    acclab.view = {};
+    acclab.collection = {};
+    acclab.model = {};
+
+    loadScript("javascripts/device/model/device.js");
+    loadScript("javascripts/device/view/device.js");
+
+    window.device = new acclab.collection.device();
+    window.deviceview = new acclab.view.device({ model: device });
+
+    device.fetch();
+
+    return;
+    $('#root-tabs').tabs();
 
     // XXX: load and view? use backbone?
 
