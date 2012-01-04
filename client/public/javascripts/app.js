@@ -2,6 +2,8 @@ $(function() {
 
     $('#root-tabs').tabs();
 
+    // XXX: usually  used same host
+    // TODO: move to config file
     var options = {
 	host: "http://localhost:3000"
     };
@@ -15,7 +17,7 @@ $(function() {
 	    var $device = $.template("<h3><a data-id='${device_id}' href='#'>${device_name}</a></h3>" +
 				     "<div>"+
 				     "Id: <span class='dev-id'>${device_id}</span><br />" +
-				     "some data (todo)" +
+				     "Total samples: <span class='label success'>${total}</span>" +
 				     "</div>");
 
 
@@ -24,7 +26,8 @@ $(function() {
 	    // TODO: think abount device name?
 	    data.devices.forEach(function(d) {
 		$.tmpl($device, {
-		    device_id: d,
+		    device_id: d.device_id,
+		    total: d.total,
 		    device_name: "Unknown"
 		}).appendTo("#device-list");
 	    });

@@ -28,8 +28,6 @@ function plot(container, data) {
 
 	    distance = Math.sqrt(x*x + y*y + z*z);
 
-	    console.log(distance);
-
 	    result.push([ el.timestamp, distance ]);
 	});
 
