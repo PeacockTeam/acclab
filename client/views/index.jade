@@ -7,14 +7,28 @@
           a(href="#") Home
 
 .container-fluid
-  .sidebar
+  .sidebar.sidebar-tab
     .well
-      h5 Devices
-      #device-list
-      button.btn.disabled#remove-graph Remove graph
+      #source-tabs
+        ul
+          li
+            a(href="#our-tab") Our devs
+          li
+            a(href="#taptap-tab") Taptap data
+        #our-tab
+          h5 Devices
+          #device-list
+          button.btn.disabled#remove-graph Remove graph
 
-      h5 Selected device
-      #selected-device
+          h5 Selected device
+          #selected-device
+
+        #taptap-tab
+          h5 Taptap test files
+          #file-list
+
+          h5 Selected file
+          #selected-file
 
   .content
     #root-tabs
@@ -28,9 +42,24 @@
 
       #raw-tab
         .hero-unit
-          span.label.important Now we plot only last 500 samples
+          |Displayed <span class="label important" id="displayed"></span> points: from
+          span#from 0
+          span(style="padding: 0 2px;")
+          |(total
+          span#total 0
+          |)
+          |Max:
+          span.label.important#max
+          #control
+            button#rewind(title="plot prev 200 items") Prev
+            button#forward(title="plot next 200 items") Next
+          br
           #graph
             h2 Click on device to plot
+          span.label.important
+            |Some data does not provide (plot) visible line.
+            |Change preview window manually for fix it.
+            a(target="_blank", href="https://github.com/PeacockTeam/acclab/issues/4") See #4
 
       #filter-tab
         .hero-unit
